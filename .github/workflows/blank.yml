@@ -61,3 +61,5 @@ jobs:
     - run: |
         esy @ios.arm64 install
         ls
+      working-directory: reason-mobile/revery
+
