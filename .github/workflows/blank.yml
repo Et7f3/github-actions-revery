@@ -54,3 +54,4 @@ jobs:
     - name: Build dependencies
       if: steps.deps-cache-macos.outputs.cache-hit != 'true'
       run: esy build-dependencies
+      working-directory: reason-mobile/revery
