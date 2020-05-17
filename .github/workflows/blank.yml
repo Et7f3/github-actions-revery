@@ -50,6 +50,7 @@ jobs:
         key: macos-main-${{ hashFiles('reason-mobile/revery/esy.lock/index.json') }}
         restore-keys: |
           macos-main-
+          macos-latest-
 
     - name: Build dependencies
       if: steps.deps-cache-macos.outputs.cache-hit != 'true'
