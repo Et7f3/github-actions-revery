@@ -19,7 +19,7 @@ jobs:
 
     steps:
 
-    -run: npm install -g esy
+    - run: npm install -g esy
 
     - name: you must have the full xcode installed
       run: ls /Applications/Xcode_11.5_beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
