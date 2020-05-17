@@ -47,11 +47,16 @@ jobs:
       uses: actions/cache@v1.1.2
       with:
         path: Users/runner/.esy/3__________________________________________________________________/i
-        key: macos-latest-${{ hashFiles('reason-mobile/revery/**/index.json') }}
+        key: macos-main-${{ hashFiles('reason-mobile/revery/esy.lock/index.json') }}
         restore-keys: |
-          macos-latest-
+          macos-main-
 
     - name: Build dependencies
       if: steps.deps-cache-macos.outputs.cache-hit != 'true'
       run: esy build-dependencies
       working-directory: reason-mobile/revery
+    - run: node ../generate/dist/cli.js ios.arm64
+      working-directory: reason-mobile/revery
+    - run: |
+        esy @ios.arm64 install
+        ls
