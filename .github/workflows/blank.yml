@@ -55,7 +55,7 @@ jobs:
       if: steps.deps-cache-macos.outputs.cache-hit != 'true'
       run: esy build-dependencies
       working-directory: reason-mobile/revery
-    - name: esy build
+    - run: esy build
       working-directory: reason-mobile/revery
 
     - run: node ../generate/dist/cli.js ios.arm64
