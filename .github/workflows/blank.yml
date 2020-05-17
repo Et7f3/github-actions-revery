@@ -32,5 +32,5 @@ jobs:
 
     # patch to fix problems with iOS and Android, also adds Xcode folder
     - name: Apply patch for ios+android
-      working-dir: reason-mobile/revery
+      working-directory: reason-mobile/revery
       run: patch -p1 < ../patches/revery/files/android+ios.patch
