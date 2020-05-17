@@ -34,3 +34,21 @@ jobs:
     - name: Apply patch for ios+android
       working-directory: reason-mobile/revery
       run: patch -p1 < ../patches/revery/files/android+ios.patch
+
+    # host deps
+    - run: esy install
+      working-directory: reason-mobile/revery
+
+
+    - name: Try to restore dependencies cache
+      id: deps-cache-macos
+      uses: actions/cache@v1.1.2
+      with:
+        path: Users/runner/.esy/3__________________________________________________________________/i
+        key: macos-latest-${{ hashFiles('reason-mobile/revery/**/index.json') }}
+        restore-keys: |
+          macos-latest-
+
+    - name: Build dependencies
+      if: steps.deps-cache-macos.outputs.cache-hit != 'true'
+      run: esy build-dependencies
