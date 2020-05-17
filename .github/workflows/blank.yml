@@ -50,12 +50,14 @@ jobs:
         key: macos-main-${{ hashFiles('reason-mobile/revery/esy.lock/index.json') }}
         restore-keys: |
           macos-main-
-          macos-latest-
 
     - name: Build dependencies
       if: steps.deps-cache-macos.outputs.cache-hit != 'true'
       run: esy build-dependencies
       working-directory: reason-mobile/revery
+    - name: esy build
+      working-directory: reason-mobile/revery
+
     - run: node ../generate/dist/cli.js ios.arm64
       working-directory: reason-mobile/revery
     - run: |
@@ -63,3 +65,18 @@ jobs:
         ls
       working-directory: reason-mobile/revery
 
+
+    - name: Try to restore dependencies cache
+      id: deps-cache-ios
+      uses: actions/cache@v1.1.2
+      with:
+        path: Users/runner/.esy/3__________________________________________________________________/i
+        key: macos-second-${{ hashFiles('reason-mobile/revery/ios.arm64.esy.lock/index.json') }}
+        restore-keys: |
+          macos-second-
+          macos-main-
+
+    - name: Build dependencies
+      if: steps.deps-cache-ios.outputs.cache-hit != 'true'
+      run: esy @ios.arm64 build-dependencies
+      working-directory: reason-mobile/revery
